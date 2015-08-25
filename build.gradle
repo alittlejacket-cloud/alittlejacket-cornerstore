@@ -41,7 +41,10 @@ dependencies {
     compile "org.springframework:spring-core",
     		"org.springframework:spring-beans",
     		"org.springframework:spring-context",
-    		"org.springframework:spring-web"
+    		"org.springframework:spring-web",
+    		"org.springframework.boot:spring-boot-starter-logging",
+    		"com.google.guava:guava"
+    		
     
     testCompile("junit:junit") {
         exclude module: "hamcrest-core"
