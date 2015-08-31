@@ -27,7 +27,16 @@ public class RestConfiguration {
     private ClientConnectionProperties clientConnectionProperties;
 
     @Bean
-    public CloseableHttpClient syncHttpClient() {
+    public RestTemplate syncRestTemplate() {
+        return new RestTemplate(syncHttpRequestFactory());
+    }
+    
+    @Bean
+    public AsyncRestTemplate asyncRestTemplate() throws IOReactorException {
+        return new AsyncRestTemplate(asyncHttpRequestFactory(), syncRestTemplate());
+    }
+    
+    private CloseableHttpClient syncHttpClient() {
         final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(clientConnectionProperties.getSyncClientMaxTotalConnections());
         connectionManager.setDefaultMaxPerRoute(clientConnectionProperties.getSyncClientMaxConnectionsPerRoute());
@@ -39,18 +48,11 @@ public class RestConfiguration {
                 .build();
     }
 
-    @Bean
-    public ClientHttpRequestFactory syncHttpRequestFactory() {
+    private ClientHttpRequestFactory syncHttpRequestFactory() {
         return new HttpComponentsClientHttpRequestFactory(syncHttpClient());
     }
-
-    @Bean
-    public RestTemplate syncRestTemplate() {
-        return new RestTemplate(syncHttpRequestFactory());
-    }
-
-    @Bean
-    public CloseableHttpAsyncClient asyncHttpClient() throws IOReactorException {
+    
+    private CloseableHttpAsyncClient asyncHttpClient() throws IOReactorException {
         final PoolingNHttpClientConnectionManager connectionManager = new PoolingNHttpClientConnectionManager(
                 new DefaultConnectingIOReactor(IOReactorConfig.DEFAULT));
         connectionManager.setMaxTotal(clientConnectionProperties.getAsyncClientMaxTotalConnections());
@@ -63,13 +65,7 @@ public class RestConfiguration {
                 .build();
     }
     
-    @Bean
-    public AsyncClientHttpRequestFactory asyncHttpRequestFactory() throws IOReactorException {
+    private AsyncClientHttpRequestFactory asyncHttpRequestFactory() throws IOReactorException {
         return new HttpComponentsAsyncClientHttpRequestFactory(asyncHttpClient());
-    }
-    
-    @Bean
-    public AsyncRestTemplate asyncRestTemplate() throws IOReactorException {
-        return new AsyncRestTemplate(asyncHttpRequestFactory(), syncRestTemplate());
     }
 }
