@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource(value = "connection.properties", ignoreResourceNotFound = true)
+@PropertySource(value = "emptyConnection.properties", ignoreResourceNotFound = true)
 public class ClientConnectionTestConfiguration {
 
     @Value("${sync.client.max.total.connections}")

@@ -1,7 +1,7 @@
 package com.alittlejacket.configuration;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -19,12 +19,12 @@ public class ClientConnectionPropertiesTest {
 
     @Test
     public void clientConnectionProperties_Should_HaveValuesFromPropertyFile_When_ValuesAreSetInPropertyFile() {
-        assertThat(clientConnectionProperties.getSyncClientMaxTotalConnections(), is(equalTo(200)));
-        assertThat(clientConnectionProperties.getSyncClientMaxConnectionsPerRoute(), is(equalTo(20)));
-        assertThat(clientConnectionProperties.getSyncClientReadTimeoutMilliseconds(), is(equalTo(60000)));
-        
-        assertThat(clientConnectionProperties.getAsyncClientMaxTotalConnections(), is(equalTo(200)));
-        assertThat(clientConnectionProperties.getAsyncClientMaxConnectionsPerRoute(), is(equalTo(20)));
-        assertThat(clientConnectionProperties.getAsyncClientReadTimeoutMilliseconds(), is(equalTo(60000)));
+        assertThat(clientConnectionProperties.getSyncClientMaxTotalConnections(), is(greaterThan(0)));
+        assertThat(clientConnectionProperties.getSyncClientMaxConnectionsPerRoute(), is(greaterThan(0)));
+        assertThat(clientConnectionProperties.getSyncClientReadTimeoutMilliseconds(), is(greaterThan(0)));
+
+        assertThat(clientConnectionProperties.getAsyncClientMaxTotalConnections(), is(greaterThan(0)));
+        assertThat(clientConnectionProperties.getAsyncClientMaxConnectionsPerRoute(), is(greaterThan(0)));
+        assertThat(clientConnectionProperties.getAsyncClientReadTimeoutMilliseconds(), is(greaterThan(0)));
     }
 }
