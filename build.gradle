@@ -59,3 +59,7 @@ dependencies {
 				"org.hamcrest:hamcrest-all:$hamcrestAllVersion",
     			"org.mockito:mockito-all:$mockitoAllVersion"
 }
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.6'
+}
