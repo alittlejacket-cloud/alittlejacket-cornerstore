@@ -7,5 +7,3 @@ build/
 .classpath
 .project
 *.iml
-gradlew
-gradlew.bat
