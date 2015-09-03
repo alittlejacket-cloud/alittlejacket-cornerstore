@@ -93,7 +93,7 @@ public class ClientConnectionProperties {
             if (value == null) {
                 return defaultValue;
             }
-            return value.intValue();
+            return value;
         }
 
         public ClientConnectionProperties build() {

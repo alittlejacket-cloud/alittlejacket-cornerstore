@@ -1,5 +1,9 @@
 package com.alittlejacket.configuration;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,14 @@ public class RestConfigurationTest {
     private AsyncRestTemplate asyncRestTemplate;
     
     @Test
-    public void test() {
-       
+    public void syncRestTemplateIsNotNull() {
+       assertThat(syncRestTemplate, is(notNullValue()));
+       assertThat(syncRestTemplate.getRequestFactory(), is(notNullValue()));
+    }
+    
+    @Test
+    public void asyncRestTemplateIsNotNull() {
+       assertThat(asyncRestTemplate, is(notNullValue()));
+       assertThat(asyncRestTemplate.getAsyncRequestFactory(), is(notNullValue()));
     }
 }
