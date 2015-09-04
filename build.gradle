@@ -46,6 +46,7 @@ dependencies {
     		"org.springframework:spring-context",
     		"org.springframework:spring-web",
     		"org.springframework.boot:spring-boot-starter-logging",
+			"com.google.guava:guava",
     		"org.apache.httpcomponents:httpasyncclient:$httpasyncclientVersion",
     		"org.apache.httpcomponents:httpclient:$httpclientVersion",
     		"org.apache.httpcomponents:httpcore:$httpcoreVersion"

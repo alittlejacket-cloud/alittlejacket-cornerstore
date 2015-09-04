@@ -10,6 +10,8 @@ public interface RestClient {
     
     <T> T get(String url, Class<T> responseType, Map<String,?> uriVariables);
     
+    <T> T get(String url, Class<T> responseType);
+    
     <T> void put(String url, Object request, Map<String,?> uriVariables); 
     
     void delete(String url, Map<String,?> urlVariables);
