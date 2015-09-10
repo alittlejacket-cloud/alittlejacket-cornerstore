@@ -34,7 +34,7 @@ public class SyncRestClient implements RestClient {
     }
 
     @Override
-    public <T> void put(String url, Object request, Map<String, ?> uriVariables) {
+    public void put(String url, Object request, Map<String, ?> uriVariables) {
         // TODO Auto-generated method stub
 
     }
