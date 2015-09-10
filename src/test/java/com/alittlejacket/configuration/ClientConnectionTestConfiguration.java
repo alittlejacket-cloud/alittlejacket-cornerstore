@@ -31,11 +31,11 @@ public class ClientConnectionTestConfiguration {
     @Bean
     public ClientConnectionProperties clientConnectionProperties() {
         return new ClientConnectionProperties.Builder().syncClientMaxTotalConnections(syncClientMaxTotalConnections)
-                .syncClientMaxConnectionsPerRoute(syncClientMaxConnectionsPerRoute)
-                .syncClientReadTimeoutMilliseconds(syncClientReadTimeoutMilliseconds)
-                .asyncClientMaxTotalConnections(asyncClientMaxTotalConnections)
-                .asyncClientMaxConnectionsPerRoute(asyncClientMaxConnectionsPerRoute)
-                .asyncClientReadTimeoutMilliseconds(asyncClientReadTimeoutMilliseconds).build();
+            .syncClientMaxConnectionsPerRoute(syncClientMaxConnectionsPerRoute)
+            .syncClientReadTimeoutMilliseconds(syncClientReadTimeoutMilliseconds)
+            .asyncClientMaxTotalConnections(asyncClientMaxTotalConnections)
+            .asyncClientMaxConnectionsPerRoute(asyncClientMaxConnectionsPerRoute)
+            .asyncClientReadTimeoutMilliseconds(asyncClientReadTimeoutMilliseconds).build();
     }
 
     @Bean

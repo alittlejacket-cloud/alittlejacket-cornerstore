@@ -19,25 +19,25 @@ public class ClientConnectionPropertiesFromTestConfigurationTest {
 
     @Autowired
     private ClientConnectionProperties clientConnectionProperties;
-    
+
     @Test
     public void clientConnectionProperties_Should_HaveDefaultValues_When_ValuesAreNotSetInPropertyFile() {
         assertThat(clientConnectionProperties.getSyncClientMaxTotalConnections(),
-                is(equalTo(DEFAULT_MAX_TOTAL_CONNECTIONS)));
+            is(equalTo(DEFAULT_MAX_TOTAL_CONNECTIONS)));
 
         assertThat(clientConnectionProperties.getSyncClientMaxConnectionsPerRoute(),
-                is(equalTo(DEFAULT_MAX_CONNECTIONS_PER_ROUTE)));
+            is(equalTo(DEFAULT_MAX_CONNECTIONS_PER_ROUTE)));
 
         assertThat(clientConnectionProperties.getSyncClientReadTimeoutMilliseconds(),
-                is(equalTo(DEFAULT_READ_TIMEOUT_MILLISECONDS)));
+            is(equalTo(DEFAULT_READ_TIMEOUT_MILLISECONDS)));
 
         assertThat(clientConnectionProperties.getAsyncClientMaxTotalConnections(),
-                is(equalTo(DEFAULT_MAX_TOTAL_CONNECTIONS)));
+            is(equalTo(DEFAULT_MAX_TOTAL_CONNECTIONS)));
 
         assertThat(clientConnectionProperties.getAsyncClientMaxConnectionsPerRoute(),
-                is(equalTo(DEFAULT_MAX_CONNECTIONS_PER_ROUTE)));
+            is(equalTo(DEFAULT_MAX_CONNECTIONS_PER_ROUTE)));
 
         assertThat(clientConnectionProperties.getAsyncClientReadTimeoutMilliseconds(),
-                is(equalTo(DEFAULT_READ_TIMEOUT_MILLISECONDS)));
+            is(equalTo(DEFAULT_READ_TIMEOUT_MILLISECONDS)));
     }
 }

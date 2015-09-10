@@ -30,41 +30,41 @@ public class RestConfiguration {
     public RestTemplate syncRestTemplate() {
         return new RestTemplate(syncHttpRequestFactory());
     }
-    
+
     @Bean
     public AsyncRestTemplate asyncRestTemplate() throws IOReactorException {
         return new AsyncRestTemplate(asyncHttpRequestFactory(), syncRestTemplate());
     }
-    
+
     private CloseableHttpClient syncHttpClient() {
         final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(clientConnectionProperties.getSyncClientMaxTotalConnections());
         connectionManager.setDefaultMaxPerRoute(clientConnectionProperties.getSyncClientMaxConnectionsPerRoute());
 
         final RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(clientConnectionProperties.getSyncClientReadTimeoutMilliseconds()).build();
+            .setConnectTimeout(clientConnectionProperties.getSyncClientReadTimeoutMilliseconds()).build();
 
         return HttpClientBuilder.create().setConnectionManager(connectionManager).setDefaultRequestConfig(config)
-                .build();
+            .build();
     }
 
     private ClientHttpRequestFactory syncHttpRequestFactory() {
         return new HttpComponentsClientHttpRequestFactory(syncHttpClient());
     }
-    
+
     private CloseableHttpAsyncClient asyncHttpClient() throws IOReactorException {
         final PoolingNHttpClientConnectionManager connectionManager = new PoolingNHttpClientConnectionManager(
-                new DefaultConnectingIOReactor(IOReactorConfig.DEFAULT));
+            new DefaultConnectingIOReactor(IOReactorConfig.DEFAULT));
         connectionManager.setMaxTotal(clientConnectionProperties.getAsyncClientMaxTotalConnections());
         connectionManager.setDefaultMaxPerRoute(clientConnectionProperties.getAsyncClientMaxConnectionsPerRoute());
 
         final RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(clientConnectionProperties.getAsyncClientReadTimeoutMilliseconds()).build();
+            .setConnectTimeout(clientConnectionProperties.getAsyncClientReadTimeoutMilliseconds()).build();
 
         return HttpAsyncClientBuilder.create().setConnectionManager(connectionManager).setDefaultRequestConfig(config)
-                .build();
+            .build();
     }
-    
+
     private AsyncClientHttpRequestFactory asyncHttpRequestFactory() throws IOReactorException {
         return new HttpComponentsAsyncClientHttpRequestFactory(asyncHttpClient());
     }

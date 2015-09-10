@@ -10,14 +10,14 @@ import org.springframework.web.client.RestTemplate;
 @RunWith(MockitoJUnitRunner.class)
 public class SyncRestClientTest {
 
-	@InjectMocks
-	private SyncRestClient client;
+    @InjectMocks
+    private SyncRestClient client;
 
-	@Mock
-	private RestTemplate syncRestTemplate;
+    @Mock
+    private RestTemplate syncRestTemplate;
 
-	@Test(expected = IllegalArgumentException.class)
-	public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsNull() {
-		client.get(null, String.class);
-	}
+    @Test(expected = IllegalArgumentException.class)
+    public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsNull() {
+        client.get(null, String.class);
+    }
 }

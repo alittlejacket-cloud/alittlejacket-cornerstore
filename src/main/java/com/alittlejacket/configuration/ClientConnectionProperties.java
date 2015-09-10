@@ -62,13 +62,13 @@ public class ClientConnectionProperties {
 
         public Builder syncClientMaxConnectionsPerRoute(Integer syncClientMaxConnectionsPerRoute) {
             this.syncClientMaxConnectionsPerRoute = toInt(syncClientMaxConnectionsPerRoute,
-                    DEFAULT_MAX_CONNECTIONS_PER_ROUTE);
+                DEFAULT_MAX_CONNECTIONS_PER_ROUTE);
             return this;
         }
 
         public Builder syncClientReadTimeoutMilliseconds(Integer syncClientReadTimeoutMilliseconds) {
             this.syncClientReadTimeoutMilliseconds = toInt(syncClientReadTimeoutMilliseconds,
-                    DEFAULT_READ_TIMEOUT_MILLISECONDS);
+                DEFAULT_READ_TIMEOUT_MILLISECONDS);
             return this;
         }
 
@@ -79,13 +79,13 @@ public class ClientConnectionProperties {
 
         public Builder asyncClientMaxConnectionsPerRoute(Integer asyncClientMaxConnectionsPerRoute) {
             this.asyncClientMaxConnectionsPerRoute = toInt(asyncClientMaxConnectionsPerRoute,
-                    DEFAULT_MAX_CONNECTIONS_PER_ROUTE);
+                DEFAULT_MAX_CONNECTIONS_PER_ROUTE);
             return this;
         }
 
         public Builder asyncClientReadTimeoutMilliseconds(Integer asyncClientReadTimeoutMilliseconds) {
             this.asyncClientReadTimeoutMilliseconds = toInt(asyncClientReadTimeoutMilliseconds,
-                    DEFAULT_READ_TIMEOUT_MILLISECONDS);
+                DEFAULT_READ_TIMEOUT_MILLISECONDS);
             return this;
         }
 
