@@ -20,4 +20,19 @@ public class SyncRestClientTest {
     public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsNull() {
         client.get(null, String.class);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsEmpty() {
+        client.get("", String.class);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsEmptyWithWhiteSpace() {
+        client.get("   ", String.class);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void get_WithoutUriVariables_Should_ThrowNullPointerException_When_ResponseTypeIsNull() {
+        client.get("uri", null);
+    }
 }

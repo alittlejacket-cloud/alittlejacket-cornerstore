@@ -1,5 +1,8 @@
 package com.alittlejacket.configuration;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CornerStoreAccessToken {
 
     private final String token;
