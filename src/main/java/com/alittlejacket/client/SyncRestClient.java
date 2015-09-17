@@ -60,9 +60,7 @@ public class SyncRestClient implements RestClient {
     }
 
     private <T> T exchange(String url, HttpMethod method, Class<T> responseType) {
-        ResponseEntity<T> response =
-            syncRestTemplate.exchange(url, method, getHttpEntity(), responseType);
-
+        ResponseEntity<T> response = syncRestTemplate.exchange(url, method, getHttpEntity(), responseType);
         return response.getBody();
     }
 
