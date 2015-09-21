@@ -21,6 +21,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 @RunWith(MockitoJUnitRunner.class)
 public class SyncRestClientTest {
 
@@ -32,6 +34,38 @@ public class SyncRestClientTest {
 
     @Mock
     private CornerStoreAccessToken accessToken;
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_UrlIsNull() {
+        client.post(null, new Object(), String.class, new HashMap<>());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_UrlIsEmpty() {
+        client.post("", new Object(), String.class, new HashMap<>());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_RequestIsNull() {
+        client.post("url", null, String.class, new HashMap<>());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_ResponseTypeIsNull() {
+        client.post("url", new Object(), null, new HashMap<>());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_UriVariablesAreNull() {
+        client.post("url", new Object(), String.class, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void post_Should_ThrowIllegalArgumentException_When_UriVariablesAreEmpty() {
+        client.post("url", new Object(), String.class, new HashMap<>());
+    }
+
+    //TODO - test for post
 
     @Test(expected = IllegalArgumentException.class)
     public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsNull() {

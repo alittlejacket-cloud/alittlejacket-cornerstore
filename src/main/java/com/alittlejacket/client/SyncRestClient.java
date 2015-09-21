@@ -23,20 +23,19 @@ public class SyncRestClient implements RestClient {
 
     @Override
     public <T> T post(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables) {
-        // TODO Auto-generated method stub
+        validate(url, request, responseType, uriVariables);
         return null;
     }
 
     @Override
     public <T> T get(String url, Class<T> responseType, Map<String, ?> uriVariables) {
-        // TODO Auto-generated method stub
-        return null;
+        validate(url, responseType, uriVariables);
+        return exchange(url, GET, responseType, uriVariables);
     }
 
     @Override
     public <T> T get(String url, Class<T> responseType) {
-        validateUrl(url);
-        validateResponseType(responseType);
+        validate(url, responseType);
         return exchange(url, GET, responseType);
     }
 
@@ -70,15 +69,45 @@ public class SyncRestClient implements RestClient {
         return new HttpEntity<>(headers);
     }
 
-    private void validateUrl(String url) {
+    private <T> void validate(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables) {
+        validate(url);
+        validate(request);
+        validate(responseType);
+        validate(uriVariables);
+    }
+
+    private <T> void validate(String url, Class<T> responseType, Map<String, ?> uriVariables) {
+        validate(url);
+        validate(responseType);
+        validate(uriVariables);
+    }
+
+    private <T> void validate(String url, Class<T> responseType) {
+        validate(url);
+        validate(responseType);
+    }
+
+    private void validate(String url) {
         if (isBlank(url)) {
             throw new IllegalArgumentException("Url must not be null or empty.");
         }
     }
 
-    private <T> void validateResponseType(Class<T> responseType) {
+    private void validate(Object request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Request must not be null.");
+        }
+    }
+
+    private <T> void validate(Class<T> responseType) {
         if (responseType == null) {
             throw new IllegalArgumentException("Response type must not be null.");
+        }
+    }
+
+    private void validate(Map<String, ?> uriVariables) {
+        if (uriVariables == null || uriVariables.isEmpty()) {
+            throw new IllegalArgumentException("Uri variables must not be null or empty.");
         }
     }
 }
