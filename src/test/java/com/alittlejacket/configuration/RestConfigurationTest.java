@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,8 +24,6 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
-
-import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ClientConnectionConfiguration.class, RestConfiguration.class})
@@ -77,7 +74,6 @@ public class RestConfigurationTest {
         mockServer.expect(requestTo(url)).andExpect(method(HttpMethod.GET))
             .andRespond(withSuccess(responsValue, MediaType.TEXT_PLAIN));
 
-
         ListenableFuture<ResponseEntity<String>> futureEntity = asyncRestTemplate
             .exchange(url, HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
 
@@ -92,7 +88,6 @@ public class RestConfigurationTest {
                 deferredResult.setErrorResult(throwable.getMessage());
             }
         });
-
 
         assertThat(deferredResult.getResult(), is(equalTo(responsValue)));
 
