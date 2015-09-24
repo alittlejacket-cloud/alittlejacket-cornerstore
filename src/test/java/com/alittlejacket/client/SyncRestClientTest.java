@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpStatus.OK;
 
 import com.alittlejacket.configuration.CornerStoreAccessToken;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SyncRestClientTest {
@@ -66,6 +68,24 @@ public class SyncRestClientTest {
     }
 
     //TODO - test for post
+    @Test
+    public void post_WithoutUriVariables_Should_ReturnValidObject_When_AllParametersAreSet() {
+        String url = "url";
+        HttpMethod method = POST;
+        String requestObject = "request";
+        String responseBody = "hallo";
+        Map<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("string", "string");
+
+        when(syncRestTemplate.exchange(eq(url), eq(method), anyObject(), eq(String.class), eq(uriVariables)))
+            .thenReturn(new ResponseEntity<>(responseBody, OK));
+
+        String request = client.post(url, requestObject, String.class, uriVariables);
+        assertThat(request, is(equalTo(responseBody)));
+
+        verify(syncRestTemplate, times(1))
+            .exchange(eq(url), eq(method), anyObject(), eq(String.class), eq(uriVariables));
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void get_WithoutUriVariables_Should_ThrowIllegalArgumentException_When_UrlIsNull() {

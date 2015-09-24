@@ -2,6 +2,7 @@ package com.alittlejacket.client;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 import com.alittlejacket.configuration.CornerStoreAccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class SyncRestClient implements RestClient {
     @Override
     public <T> T post(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables) {
         validate(url, request, responseType, uriVariables);
-        return null;
+        return exchange(url, POST, request, responseType, uriVariables);
     }
 
     @Override
@@ -49,6 +50,16 @@ public class SyncRestClient implements RestClient {
     public void delete(String url, Map<String, ?> urlVariables) {
         // TODO Auto-generated method stub
 
+    }
+
+    private <T> T exchange(String url, HttpMethod method, Object request, Class<T> responseType,
+        Map<String, ?> uriVariables) {
+        HttpEntity<?> entity = new HttpEntity<>(request, getHttpEntity().getHeaders());
+        //TODO object to multivalue map
+        ResponseEntity<T> response =
+            syncRestTemplate.exchange(url, method, entity, responseType, uriVariables);
+
+        return response.getBody();
     }
 
     private <T> T exchange(String url, HttpMethod method, Class<T> responseType, Map<String, ?> uriVariables) {
